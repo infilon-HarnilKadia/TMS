@@ -1,0 +1,35 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Filament\Resources\Roles\Pages;
+
+use App\Filament\Resources\Roles\RoleResource;
+use Filament\Actions\EditAction;
+use Filament\Resources\Pages\ViewRecord;
+use Override;
+
+class ViewRole extends ViewRecord
+{
+    protected static string $resource = RoleResource::class;
+
+    protected function getActions(): array
+    {
+        return [
+            EditAction::make(),
+        ];
+    }
+
+    #[Override]
+    protected function mutateFormDataBeforeFill(array $data): array
+    {
+        $data['field_visibility'] = $this->record
+            ->moduleFields()
+            ->get()
+            ->groupBy('module_key')
+            ->map(fn ($fields) => $fields->pluck('id')->toArray())
+            ->toArray();
+
+        return $data;
+    }
+}

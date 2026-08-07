@@ -14,6 +14,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Collection;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements FilamentUser, HasTenants, MustVerifyEmail
 {
@@ -21,6 +22,8 @@ class User extends Authenticatable implements FilamentUser, HasTenants, MustVeri
 
     /** @use HasFactory<UserFactory> */
     use HasFactory;
+
+    use HasRoles;
 
     use Notifiable;
 
@@ -37,6 +40,7 @@ class User extends Authenticatable implements FilamentUser, HasTenants, MustVeri
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'password' => 'hashed',
     ];
 
     public function canAccessPanel(Panel $panel): bool
