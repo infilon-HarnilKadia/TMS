@@ -61,6 +61,11 @@ class DatabaseSeeder extends Seeder
         ]));
         $this->command->info('Admin user created.');
 
+        $this->command->warn(PHP_EOL . 'Seeding roles and permissions...');
+        $this->call(ShieldSeeder::class);
+        $user->first()->assignRole('super_admin');
+        $this->command->info('Roles and permissions seeded.');
+
         // Shop
         $this->command->warn(PHP_EOL . 'Creating brands...');
         $brands = $this->withProgressBar($vary(20), fn () => Brand::factory()->count(20)
