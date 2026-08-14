@@ -126,3 +126,40 @@ html:not(.dark) .fi-section {
     border-radius: 0.75rem;
     box-shadow: none;
 }
+
+/* ── Wizard stepper ───────────────────────────────────────────────────── */
+
+/* Pending steps: muted circle + label */
+.fi-sc-wizard-header-step .fi-sc-wizard-header-step-icon-ctn {
+    background-color: #e5e7eb;
+}
+
+html.dark .fi-sc-wizard-header-step .fi-sc-wizard-header-step-icon-ctn {
+    background-color: #374151;
+}
+
+.fi-sc-wizard-header-step .fi-sc-wizard-header-step-number {
+    color: #6b7280;
+    font-weight: 600;
+}
+
+/* Active + completed steps: solid brand green, white glyph */
+.fi-sc-wizard-header-step.fi-active .fi-sc-wizard-header-step-icon-ctn,
+.fi-sc-wizard-header-step.fi-completed .fi-sc-wizard-header-step-icon-ctn {
+    background-color: var(--color-primary-600);
+}
+
+.fi-sc-wizard-header-step.fi-active .fi-sc-wizard-header-step-number,
+.fi-sc-wizard-header-step.fi-completed .fi-sc-wizard-header-step-number,
+.fi-sc-wizard-header-step.fi-completed .fi-sc-wizard-header-step-icon-ctn .fi-icon {
+    color: #fff;
+}
+
+.fi-sc-wizard-header-step.fi-active .fi-sc-wizard-header-step-label {
+    color: var(--color-primary-700);
+    font-weight: 600;
+}
+
+html.dark .fi-sc-wizard-header-step.fi-active .fi-sc-wizard-header-step-label {
+    color: var(--color-primary-300);
+}
