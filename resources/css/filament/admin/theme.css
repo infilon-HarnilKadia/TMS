@@ -2,3 +2,127 @@
 
 @source '../../../../app/Filament/**/*';
 @source '../../../../resources/views/filament/**/*';
+
+@theme {
+    /*
+     * Brand green, sampled from the Transport ERP design.
+     * The 600 shade is the exact brand green used for primary buttons and
+     * the active sidebar item. Keep it in sync with Color::hex() in
+     * AdminPanelProvider.
+     */
+    --color-primary-50: #eef8f2;
+    --color-primary-100: #d6ecdf;
+    --color-primary-200: #b0d9c1;
+    --color-primary-300: #82c09d;
+    --color-primary-400: #55a479;
+    --color-primary-500: #378a5e;
+    --color-primary-600: #2e7d46;
+    --color-primary-700: #256439;
+    --color-primary-800: #1f4f2f;
+    --color-primary-900: #1a4128;
+    --color-primary-950: #0d2416;
+
+    /* Sidebar shell — dark in both colour schemes, per the design */
+    --color-sidebar-bg: #141b26;
+    --color-sidebar-raised: #1e2836;
+    --color-sidebar-text: #98a2b3;
+    --color-sidebar-heading: #64748b;
+    --color-sidebar-border: rgb(255 255 255 / 0.07);
+}
+
+/*
+ * Everything below is intentionally unlayered so it outranks Tailwind's
+ * layered utilities and Filament's own component CSS (which is imported
+ * above, so equal-specificity rules lose on source order).
+ */
+
+/* ── Sidebar ──────────────────────────────────────────────────────────── */
+
+.fi-sidebar {
+    background-color: var(--color-sidebar-bg);
+    border-inline-end: 1px solid var(--color-sidebar-border);
+}
+
+.fi-sidebar-header {
+    background-color: var(--color-sidebar-bg);
+    border-block-end: 1px solid var(--color-sidebar-border);
+    box-shadow: none;
+}
+
+/* Group headings — MASTERS / OPERATIONS / RECONCILIATION / ANALYTICS */
+.fi-sidebar-group-label {
+    color: var(--color-sidebar-heading);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+/* Resting nav items */
+.fi-sidebar-item-btn {
+    border-radius: 0.5rem;
+    color: var(--color-sidebar-text);
+    font-weight: 500;
+}
+
+.fi-sidebar-item-icon {
+    color: var(--color-sidebar-text);
+}
+
+.fi-sidebar-item-btn:hover {
+    background-color: var(--color-sidebar-raised);
+    color: #fff;
+}
+
+.fi-sidebar-item-btn:hover .fi-sidebar-item-icon {
+    color: #fff;
+}
+
+/* Active nav item — solid green pill */
+.fi-sidebar-item.fi-active > .fi-sidebar-item-btn,
+.fi-sidebar-item.fi-active > .fi-sidebar-item-btn:hover {
+    background-color: var(--color-primary-600);
+    color: #fff;
+    font-weight: 600;
+}
+
+.fi-sidebar-item.fi-active > .fi-sidebar-item-btn .fi-sidebar-item-icon {
+    color: #fff;
+}
+
+/* Collapse / group toggle buttons sitting on the dark shell */
+.fi-sidebar-group-collapse-btn,
+.fi-sidebar-open-collapse-sidebar-btn,
+.fi-sidebar-close-collapse-sidebar-btn {
+    color: var(--color-sidebar-heading);
+}
+
+.fi-sidebar-group-collapse-btn:hover,
+.fi-sidebar-open-collapse-sidebar-btn:hover,
+.fi-sidebar-close-collapse-sidebar-btn:hover {
+    color: #fff;
+}
+
+/* Footer slot (user block) pinned to the bottom of the sidebar */
+.fi-sidebar-footer {
+    border-block-start: 1px solid var(--color-sidebar-border);
+    padding: 0.75rem;
+}
+
+/* ── Content shell (light mode only — leave dark mode to Filament) ────── */
+
+html:not(.dark) .fi-main-ctn {
+    background-color: #f6f7f9;
+}
+
+html:not(.dark) .fi-topbar > nav {
+    border-block-end: 1px solid #e5e7eb;
+    box-shadow: none;
+}
+
+/* Cards / sections — flat white with a hairline border, as in the design */
+html:not(.dark) .fi-section {
+    border: 1px solid #e5e7eb;
+    border-radius: 0.75rem;
+    box-shadow: none;
+}
